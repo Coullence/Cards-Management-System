@@ -1,0 +1,49 @@
+server:
+  port: 9090
+# TODO Database Config
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/db_cards_v1?enabledTLSProtocols=TLSv1.2
+    username: emtech
+    password: emtech@2022
+#    driver-class-name: com.mariadb.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate.format_sql: false
+      hibernate.dialect: org.hibernate.dialect.MariaDBDialect
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+## TODO EMAILS Config
+  application:
+    enableEmail: true
+    useOTP: true
+    otpProd: true
+    otpTestMail: ckibet@emtechhouse.co.ke
+    # TODO: CORS
+    client:
+      origin: "*"
+
+  mail:
+    protocol: smtps
+    host: mail.emtechhouse.co.ke
+    port: 465
+    username: no-reply@emtechhouse.co.ke
+    password: Pass123$$
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.ssl.trust: "*"
+      mail.smtp.starttls.enable: true
+
+myswagger:
+  openapi:
+    dev-url: http://localhost:9099
+    prod-url: http://52.15.152.26:9099
+
+enc:
+  key: VcbKey0123456789
+  initVector: VcbInitVector012
