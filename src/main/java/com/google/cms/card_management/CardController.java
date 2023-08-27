@@ -1,5 +1,6 @@
 package com.google.cms.card_management;
 
+import com.google.cms.utilities.Shared.AuthenticatedUser;
 import com.google.cms.utilities.Shared.EntityResponse;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -8,22 +9,25 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/cards")
 public class CardController {
+    public final AuthenticatedUser authenticatedUser;
     private final CardService cardService;
 
-    public CardController(CardService cardService) {
+    public CardController(AuthenticatedUser authenticatedUser, CardService cardService) {
+        this.authenticatedUser = authenticatedUser;
         this.cardService = cardService;
     }
     @PostMapping("/add")
     public EntityResponse createCard(@RequestBody Card card){ return cardService.createCard(card);}
     @GetMapping("/all")
-    public EntityResponse findAllCard()
-    {
-        return cardService.findAllCard();
+    public EntityResponse findAllCard() {
+        return cardService.findAllCard(authenticatedUser.getUser());
     }
+
+
     @GetMapping("/find/card")
     public EntityResponse findById(@RequestParam Long id)
     {
-        return cardService.findCardById(id);
+        return cardService.findCardById(authenticatedUser.getUser(),id);
     }
     @GetMapping("/search")
     public EntityResponse searchCards(
@@ -32,7 +36,7 @@ public class CardController {
             @RequestParam(required = false) String status,
             Pageable pageable
     ) {
-       return cardService.searchCards(name, color, status, pageable);
+       return cardService.searchCards(name, color, status,authenticatedUser.getUser(),pageable);
     }
     @PutMapping("/update")
     public EntityResponse updateCard(@RequestBody Card card)

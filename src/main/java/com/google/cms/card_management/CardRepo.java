@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface CardRepo extends JpaRepository<Card, Long> {
     List<Card> findByDeletedFlag(Character deletedFlag);
-    Page<Card> findByNameAndColorAndStatusOrderByPostedTimeDesc(String name, String color, String status, Pageable pageable);
+    Page<Card> findByNameAndColorAndStatusAndDeletedFlagOrderByPostedTimeDesc(String name, String color, String status,Character deletedFlag, Pageable pageable);
 }

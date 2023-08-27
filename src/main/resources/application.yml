@@ -6,7 +6,6 @@ spring:
     url: jdbc:mariadb://localhost:3306/db_cards_v1?enabledTLSProtocols=TLSv1.2
     username: emtech
     password: emtech@2022
-#    driver-class-name: com.mariadb.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
@@ -20,30 +19,10 @@ spring:
 
 ## TODO EMAILS Config
   application:
-    enableEmail: true
-    useOTP: true
-    otpProd: true
-    otpTestMail: ckibet@emtechhouse.co.ke
+    jwtExpirationMs: 600000
+    jwtRefreshExpirationMs: 1200000
+    jwtSecret: /buCOEjS/+H7ZwekxyLKLdDeegHUGEytjxuivosdrzjRG4g4E+kA3uXO5lvGBVsl2NwqsgiGUUI5bjgY/6WG/VSIIG+22b1Rvdb59BY0YRod6Dnjnp0REsPn//hshs6ucnOVCBRp0lbVb1kP+EDOM7W7N72/+t+R1d8JQ4pjisoJZI4e0MV3PlZtzXKI0SY2EQUtI
+
     # TODO: CORS
     client:
       origin: "*"
-
-  mail:
-    protocol: smtps
-    host: mail.emtechhouse.co.ke
-    port: 465
-    username: no-reply@emtechhouse.co.ke
-    password: Pass123$$
-    properties:
-      mail.smtp.auth: true
-      mail.smtp.ssl.trust: "*"
-      mail.smtp.starttls.enable: true
-
-myswagger:
-  openapi:
-    dev-url: http://localhost:9099
-    prod-url: http://52.15.152.26:9099
-
-enc:
-  key: VcbKey0123456789
-  initVector: VcbInitVector012

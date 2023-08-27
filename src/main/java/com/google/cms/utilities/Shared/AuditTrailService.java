@@ -1,12 +1,20 @@
 package com.google.cms.utilities.Shared;
 
+import com.google.cms.Users.Activeusers.User;
+import com.google.cms.Users.Activeusers.UserRepository;
 import com.google.cms.utilities.requests_proxy.UserRequestContext;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class AuditTrailService {
+    private final UserRepository userRepository;
+
+    public AuditTrailService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public <T extends Audittrails> T POSTAudit(T data) {
         data.setPostedBy(UserRequestContext.getCurrentUser());

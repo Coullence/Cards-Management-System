@@ -18,12 +18,7 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(false);
         config.setMaxAge(4000000L);
-//		For Security Set to only allow request from a static elastic IP
         config.addAllowedOrigin(origin);
-        config.addAllowedOrigin("http://localhost:4200/");
-        config.addAllowedOrigin("http://localhost:4300/");
-        config.addAllowedOrigin("http://localhost:3000/");
-        config.addAllowedOrigin("http://10.2.1.109");
         config.addAllowedHeader("Content-Type");
         config.addAllowedHeader("x-xsrf-token");
         config.addAllowedHeader("Authorization");
@@ -50,8 +45,7 @@ public class CorsConfig {
         config.addAllowedMethod("POST");
         config.addAllowedMethod("DELETE");
         config.addAllowedMethod("PATCH");
-        System.out.println("-----------------------------------");
-        System.out.println(config.getAllowedOrigins());
+        log.info("---------------------Allowed Origin"+config.getAllowedOrigins());
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;

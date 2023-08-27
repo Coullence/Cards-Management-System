@@ -13,14 +13,14 @@ public class RequestInterceptor implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-        String username = httpRequest.getHeader("username");
+        String username = UserRequestContext.getCurrentUser();
         if (username == null || username.trim().isEmpty() || username.trim().equalsIgnoreCase("")){
             username = "Guest";
         }else {
             UserRequestContext.setCurrentUser(username);
         }
         username = (username == null || username.trim().isEmpty() || username.trim().equalsIgnoreCase("")) ? "Guest" : username;
-        log.info("--------------------- Request Made by: " +username+", Request Method: "+httpRequest.getMethod() + ", Requested URI: " +httpRequest.getRequestURI() + ", at: " + LocalDateTime.now());
+        log.info("---------------------Request Made by: " +username+", Request Method: "+httpRequest.getMethod() + ", Requested URI: " +httpRequest.getRequestURI() + ", at: " + LocalDateTime.now());
         chain.doFilter(request, response);
     }
 }

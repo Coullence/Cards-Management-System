@@ -1,11 +1,14 @@
 package com.google.cms.utilities.Shared;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.cms.Users.Activeusers.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 @AllArgsConstructor
